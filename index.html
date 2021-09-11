@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1 class="titulo">Calculadora</h1>
+    </header>
+    <div class="container">
+      <div class="calculadora">
+        <h6>Por favor, ingrese sus operandos y luego seleccione un operador.</h6>
+        <div class="operandos">
+          <input type="number" id="n1" class="operando" onBlur="habilitacion()">
+          <span class="flecha">↓</span>
+          <input type="number" id="n2" class="operando" onBlur="habilitacion()">
+        </div>
+        <div class="operadores">
+          <button type="button" class="operador" id="suma" onClick="operacion('suma')" disabled>+</button>
+          <button type="button" class="operador" id="resta" onClick="operacion('resta')" disabled>-</button>
+          <button type="button" class="operador" id="multiplicacion"  onClick="operacion('multiplicacion')" disabled>*</button>
+          <button type="button" class="operador" id="division" onClick="operacion('division')" disabled>/</button>
+        </div>
+        <div class="resultado">
+          <label id="resultado"></label>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      habilitacion = () =>{
+        var n1 = document.getElementById('n1').value;
+        var n2 = document.getElementById('n2').value;
+
+        if(n1!='' && n2!=''){
+          document.getElementById('suma').disabled=false;
+          document.getElementById('resta').disabled=false;
+          document.getElementById('multiplicacion').disabled=false;
+          document.getElementById('division').disabled=false;
+        }
+        else{
+          document.getElementById('suma').disabled=true;
+          document.getElementById('resta').disabled=true;
+          document.getElementById('multiplicacion').disabled=true;
+          document.getElementById('division').disabled=true;
+        }
+      }
+
+      operacion = (op) =>{
+        var operando1 = document.getElementById('n1').value;
+        var operando2=document.getElementById('n2').value;
+        var resultado = document.getElementById('resultado');
+        switch (op) {
+          case 'suma':
+              resultado.innerHTML = parseInt(operando1)+parseInt(operando2);
+            break;
+          case 'resta':
+              resultado.innerHTML = parseInt(operando1)-parseInt(operando2);
+              break;
+          case 'multiplicacion':
+              resultado.innerHTML = parseInt(operando1)*parseInt(operando2);
+              break;
+          case 'division':
+              if(parseInt(operando2) == 0){
+                resultado.innerHTML= "Math error!";
+              } else{
+                resultado.innerHTML=parseFloat(operando1)/parseFloat(operando2);
+              }
+              break;
+          default:
+
+        }
+      }
+    </script>
+  </body>
+</html>
